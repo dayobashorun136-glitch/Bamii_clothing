@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BAMIIII AdminHub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0A0A0A;--cream:#F5F0E8;--gold:#C6A15B;--bg:#F5F0E8;--fg:#0A0A0A;--card:#fff;--line:rgba(10,10,10,.14);--mute:rgba(10,10,10,.6);--bad:#b3261e;--good:#2e6b3a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0A0A0A;--fg:#F5F0E8;--card:#171717;--line:rgba(245,240,232,.18);--mute:rgba(245,240,232,.62);--bad:#ff8a80;--good:#8fd19e;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0A0A0A;--fg:#F5F0E8;--card:#171717;--line:rgba(245,240,232,.18);--mute:rgba(245,240,232,.62);--bad:#ff8a80;--good:#8fd19e;color-scheme:dark}
+html{height:100%}*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 14px/1.5 Inter,system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#0A0A0A;z-index:30}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;margin:0;font-weight:700;line-height:1.1}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:#0A0A0A;color:#F5F0E8}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px}
+.logo{font:700 22px "Cormorant Garamond",serif;letter-spacing:.28em}.logo small{font:500 11px Inter;letter-spacing:.2em;color:var(--gold);margin-left:10px}
+.tabs{display:flex;gap:2px;overflow-x:auto;padding:0 12px;border-top:1px solid rgba(245,240,232,.14)}
+.tab{background:none;border:0;border-bottom:2px solid transparent;color:rgba(245,240,232,.7);padding:12px 14px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
+.tab[aria-selected="true"]{color:#F5F0E8;border-color:var(--gold)}
+main{max-width:1100px;margin:0 auto;padding:22px 18px 60px}
+.banner{background:var(--card);border:1px solid var(--gold);padding:10px 14px;font-size:13px;margin-bottom:22px}
+h2{font-size:34px;margin-bottom:16px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:800px){.stats{grid-template-columns:repeat(5,1fr)}}
+.stat,.box{background:var(--card);border:1px solid var(--line);padding:16px}
+.stat b{display:block;font:700 26px "Cormorant Garamond",serif;margin-top:4px}
+.lab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.bar{height:8px;background:var(--line);margin-top:4px}.bar i{display:block;height:8px;background:var(--gold)}
+.btn{border:1px solid var(--fg);background:var(--fg);color:var(--bg);padding:10px 18px;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+.btn.o{background:none;color:var(--fg)}.btn.g{background:var(--gold);border-color:var(--gold);color:#0A0A0A}
+.btn:hover{border-color:var(--gold)}
+.lnk{background:none;border:0;text-decoration:underline;padding:4px 6px}.lnk.d{color:var(--bad)}
+input,select,textarea{width:100%;background:var(--card);border:1px solid var(--line);padding:9px 11px}
+label{display:block;margin:12px 0 4px}
+.g2{display:grid;gap:0 14px}@media(min-width:700px){.g2{grid-template-columns:1fr 1fr}}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.sp{justify-content:space-between}
+.list{display:grid;gap:12px}
+.item{background:var(--card);border:1px solid var(--line);padding:14px}
+.pill{display:inline-block;font-size:11px;padding:2px 9px;border:1px solid var(--line);margin-right:6px}
+.pill.p{border-color:var(--good);color:var(--good)}.pill.w{border-color:var(--gold)}.pill.x{border-color:var(--bad);color:var(--bad)}
+.mut{color:var(--mute);font-size:13px}
+.msg{min-height:20px;font-size:13px;margin:8px 0;color:var(--good)}.msg.e{color:var(--bad)}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:500}
+.scroll{overflow-x:auto}
+td input[type=number]{width:84px}
+</style>
+</head>
+<body>
+<header>
+  <div class="top"><div class="logo">BAMIIII<small>ADMINHUB</small></div><span class="mut" style="color:rgba(245,240,232,.7)">Admin</span></div>
+  <div class="tabs" role="tablist" id="tabs"></div>
+</header>
+<main>
+  <div class="banner">Preview with sample data, saved only in this browser. The live admin signs in with Firebase, and Firestore rules decide who may use it.</div>
+  <div id="view"></div>
+</main>
+
+<script>
+const $=s=>document.querySelector(s);
+const naira=n=>"₦"+Number(n||0).toLocaleString("en-NG");
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const SEED={
+ cats:["T-shirts","Hoodies","Shirts","Trousers","Jeans","Jackets","Dresses","Accessories"],
+ prods:[
+  {id:1,n:"BAMIIII Essential T-Shirt",c:"T-shirts",g:"unisex",p:15000,sp:0,s:"S, M, L, XL, XXL",k:"Black, White, Cream",st:0,sample:1},
+  {id:2,n:"BAMIIII Signature Hoodie",c:"Hoodies",g:"unisex",p:35000,sp:0,s:"S, M, L, XL, XXL",k:"Black, Cream, Grey",st:0,sample:1},
+  {id:3,n:"BAMIIII Premium Shirt",c:"Shirts",g:"men",p:25000,sp:0,s:"S, M, L, XL",k:"White, Black, Blue",st:0,sample:1},
+  {id:4,n:"BAMIIII Streetwear Trousers",c:"Trousers",g:"unisex",p:28000,sp:0,s:"28, 30, 32, 34, 36",k:"Black, Grey, Khaki",st:0,sample:1},
+  {id:5,n:"BAMIIII Denim Jeans",c:"Jeans",g:"unisex",p:32000,sp:0,s:"28, 30, 32, 34, 36",k:"Blue, Black",st:0,sample:1}],
+ codes:[{c:"BAMI10",t:"percent",v:10,min:0,on:true,used:0}],
+ orders:[
+  {id:"BAM-7K2F91",name:"Sample Customer A",ph:"08012345678",em:"a@example.com",ad:"12 Sample Road, Ikeja, Lagos",items:[{n:"BAMIIII Signature Hoodie",q:1,s:"L",k:"Black",p:35000}],total:38000,pay:"paid",s:"paid",d:"21 Oct 2026"},
+  {id:"BAM-3M8Q10",name:"Sample Customer B",ph:"08087654321",em:"b@example.com",ad:"5 Test Close, Wuse, FCT Abuja",items:[{n:"BAMIIII Denim Jeans",q:2,s:"32",k:"Blue",p:32000},{n:"BAMIIII Essential T-Shirt",q:1,s:"M",k:"White",p:15000}],total:84000,pay:"paid",s:"shipped",d:"20 Oct 2026"},
+  {id:"BAM-9X1L44",name:"Sample Customer C",ph:"08055550000",em:"c@example.com",ad:"9 Demo Street, Lekki, Lagos",items:[{n:"BAMIIII Premium Shirt",q:1,s:"M",k:"Blue",p:25000}],total:28000,pay:"pending",s:"pending_payment",d:"21 Oct 2026"}]};
+let D;try{D=JSON.parse(localStorage.getItem("bm_admin"))}catch(e){}
+D=D||JSON.parse(JSON.stringify(SEED));
+const save=()=>{try{localStorage.setItem("bm_admin",JSON.stringify(D))}catch(e){}};
+const LBL={pending_payment:"Pending payment",paid:"Paid",processing:"Processing",shipped:"Shipped",delivered:"Delivered",cancelled:"Cancelled"};
+let tab="ov",edit=null,filter="",msg="";
+const TABS=[["ov","Overview"],["or","Orders"],["pr","Products"],["ct","Categories"],["dc","Discounts"]];
+
+function paintTabs(){$("#tabs").innerHTML=TABS.map(([i,l])=>`<button class="tab" role="tab" data-t="${i}" aria-selected="${tab===i}">${l}</button>`).join("")}
+
+function ov(){
+ const paid=D.orders.filter(o=>o.pay==="paid"&&o.s!=="cancelled"),rev=paid.reduce((s,o)=>s+o.total,0);
+ const top={};paid.forEach(o=>o.items.forEach(i=>top[i.n]=(top[i.n]||0)+i.q));
+ const tl=Object.entries(top).sort((a,b)=>b[1]-a[1]).slice(0,5),mx=tl[0]?tl[0][1]:1;
+ const cards=[["Revenue (paid)",naira(rev)],["Paid orders",paid.length],["Average order",naira(paid.length?rev/paid.length:0)],["To fulfil",D.orders.filter(o=>["paid","processing"].includes(o.s)).length],["Awaiting payment",D.orders.filter(o=>o.pay==="pending").length]];
+ return `<h2>Overview</h2><div class="stats">${cards.map(c=>`<div class="stat"><span class="lab">${c[0]}</span><b>${c[1]}</b></div>`).join("")}</div>
+ <h2 style="margin-top:28px">Top products</h2><div class="box">${tl.length?tl.map(t=>`<div style="margin-bottom:12px"><div class="row sp"><span>${esc(t[0])}</span><span>${t[1]} sold</span></div><div class="bar"><i style="width:${t[1]/mx*100}%"></i></div></div>`).join(""):`<p class="mut">No paid orders yet.</p>`}</div>`;
+}
+
+function or(){
+ const L=filter?D.orders.filter(o=>o.s===filter):D.orders;
+ return `<div class="row sp"><h2>Orders (${L.length})</h2><div><label for="of" class="lab" style="margin:0">Filter</label><select id="of"><option value="">All statuses</option>${Object.entries(LBL).map(([k,v])=>`<option value="${k}" ${filter===k?"selected":""}>${v}</option>`).join("")}</select></div></div>
+ <div class="list">${L.length?L.map(o=>{const opts=o.pay==="paid"?["processing","shipped","delivered","cancelled"]:["cancelled"];
+ return `<article class="item"><div class="row sp"><b>${o.id}</b><b>${naira(o.total)}</b></div><div class="mut">${o.d}</div>
+ <div class="g2" style="margin-top:8px"><div><span class="lab">Customer</span><br>${esc(o.name)}<br>${esc(o.em)}<br>${esc(o.ph)}</div><div><span class="lab">Deliver to</span><br>${esc(o.ad)}</div></div>
+ <ul style="padding-left:18px;margin:10px 0">${o.items.map(i=>`<li>${esc(i.n)} × ${i.q} <span class="mut">${i.s} · ${i.k}</span></li>`).join("")}</ul>
+ <div class="row"><span class="pill ${o.pay==="paid"?"p":"w"}">Payment: ${o.pay==="paid"?"Paid":"Pending"}</span>
+ <label class="lab" style="margin:0" for="s-${o.id}">Status</label><select id="s-${o.id}" data-o="${o.id}" style="width:auto"><option value="">${LBL[o.s]}</option>${opts.map(x=>`<option value="${x}">${LBL[x]}</option>`).join("")}</select></div></article>`}).join(""):`<p class="mut">No orders to show.</p>`}</div>
+ <p class="mut" style="margin-top:12px">Only a server-verified payment can mark an order Paid. Admins can change fulfilment status only.</p>`;
+}
+
+function pr(){
+ if(edit){const p=edit;return `<h2>${p.id?"Edit product":"Add product"}</h2><form id="pf" novalidate class="box"><div class="g2">
+ <div><label for="n">Name</label><input id="n" value="${esc(p.n||"")}"></div>
+ <div><label for="c">Category</label><select id="c">${D.cats.map(c=>`<option ${p.c===c?"selected":""}>${c}</option>`).join("")}</select></div>
+ <div><label for="g">Gender</label><select id="g">${["unisex","men","women"].map(g=>`<option ${p.g===g?"selected":""}>${g}</option>`).join("")}</select></div>
+ <div><label for="p">Price (₦)</label><input id="p" type="number" min="0" value="${p.p||""}"></div>
+ <div><label for="sp">Sale price (₦, optional)</label><input id="sp" type="number" min="0" value="${p.sp||""}"></div>
+ <div><label for="st">Stock quantity</label><input id="st" type="number" min="0" value="${p.st??0}"></div>
+ <div><label for="s">Sizes (comma separated)</label><input id="s" value="${esc(p.s||"")}"></div>
+ <div><label for="k">Colours (comma separated)</label><input id="k" value="${esc(p.k||"")}"></div></div>
+ <label for="im">Photo link (optional)</label><input id="im" value="${esc(p.im||"")}" placeholder="https://… or /images/hoodie.jpg">
+ <div class="msg e" id="pm" role="alert"></div><div class="row"><button class="btn" type="submit">Save product</button><button class="btn o" type="button" data-x="cancel">Cancel</button></div></form>`}
+ return `<div class="row sp"><h2>Products (${D.prods.length})</h2><button class="btn g" data-x="new">Add product</button></div><div class="msg" role="status">${msg}</div>
+ <div class="box scroll"><table><thead><tr><th>Product</th><th>Price</th><th>Stock</th><th></th></tr></thead><tbody>${D.prods.map(p=>`<tr><td><b>${esc(p.n)}</b><div class="mut">${p.c} · ${p.g}${p.sample?" · sample":""}</div></td>
+ <td>${p.sp?`<b>${naira(p.sp)}</b> <s class="mut">${naira(p.p)}</s>`:naira(p.p)}</td>
+ <td><input type="number" min="0" value="${p.st}" data-stock="${p.id}" aria-label="Stock for ${esc(p.n)}"></td>
+ <td><button class="lnk" data-e="${p.id}">Edit</button><button class="lnk d" data-del="${p.id}">Delete</button></td></tr>`).join("")||`<tr><td colspan="4" class="mut">No products yet.</td></tr>`}</tbody></table></div>
+ <p class="mut" style="margin-top:10px">Sample items stay at stock 0 so they never show as real available stock.</p>`;
+}
+
+function ct(){return `<h2>Categories</h2><div class="g2"><div class="box"><ul style="list-style:none;padding:0;margin:0">${D.cats.map(c=>`<li class="row sp" style="padding:8px 0;border-bottom:1px solid var(--line)"><span>${esc(c)}</span><button class="lnk d" data-dc="${esc(c)}">Delete</button></li>`).join("")}</ul></div>
+ <form id="cf" class="box" novalidate><label for="cn" style="margin-top:0">New category</label><input id="cn"><div class="msg e" id="cm" role="alert"></div><button class="btn" type="submit">Add category</button></form></div>`}
+
+function dc(){return `<h2>Discount codes</h2><div class="g2"><div class="list">${D.codes.map(c=>`<div class="item"><div class="row sp"><b>${esc(c.c)}</b><span class="pill ${c.on?"p":"x"}">${c.on?"Active":"Off"}</span></div>
+ <div class="mut">${c.t==="percent"?c.v+"% off":naira(c.v)+" off"}${c.min?" · min "+naira(c.min):""} · used ${c.used}</div>
+ <button class="lnk" data-tg="${esc(c.c)}">${c.on?"Disable":"Enable"}</button><button class="lnk d" data-dd="${esc(c.c)}">Delete</button></div>`).join("")||`<p class="mut">No codes yet.</p>`}</div>
+ <form id="df" class="box" novalidate><h3 style="font-size:24px">Create a code</h3><label for="dcc">Code</label><input id="dcc" placeholder="WELCOME10">
+ <div class="g2"><div><label for="dt">Type</label><select id="dt"><option value="percent">Percent</option><option value="fixed">Fixed ₦</option></select></div><div><label for="dv">Value</label><input id="dv" type="number" min="0"></div></div>
+ <label for="dm">Minimum order (₦)</label><input id="dm" type="number" min="0"><div class="msg e" id="dm2" role="alert"></div><button class="btn" type="submit">Create code</button></form></div>`}
+
+function draw(){paintTabs();$("#view").innerHTML={ov,or,pr,ct,dc}[tab]()}
+
+document.addEventListener("click",e=>{
+ const b=e.target.closest("button");if(!b)return;const d=b.dataset;
+ if(d.t){tab=d.t;edit=null;msg="";draw()}
+ else if(d.x==="new"){edit={};draw()}
+ else if(d.x==="cancel"){edit=null;draw()}
+ else if(d.e){edit={...D.prods.find(p=>p.id==d.e)};draw()}
+ else if(d.del){const p=D.prods.find(x=>x.id==d.del);if(confirm(`Delete “${p.n}”? This cannot be undone.`)){D.prods=D.prods.filter(x=>x.id!=d.del);save();msg="Product deleted.";draw()}}
+ else if(d.dc){if(confirm(`Delete category “${d.dc}”?`)){D.cats=D.cats.filter(c=>c!==d.dc);save();draw()}}
+ else if(d.tg){const c=D.codes.find(x=>x.c===d.tg);c.on=!c.on;save();draw()}
+ else if(d.dd){if(confirm(`Delete code ${d.dd}?`)){D.codes=D.codes.filter(c=>c.c!==d.dd);save();draw()}}
+});
+document.addEventListener("change",e=>{
+ const t=e.target;
+ if(t.id==="of"){filter=t.value;draw()}
+ else if(t.dataset.o){const o=D.orders.find(x=>x.id===t.dataset.o);if(t.value){o.s=t.value;save();draw()}}
+ else if(t.dataset.stock){const p=D.prods.find(x=>x.id==t.dataset.stock),v=Math.max(0,parseInt(t.value)||0);p.st=v;t.value=v;save()}
+});
+document.addEventListener("submit",e=>{
+ e.preventDefault();const f=e.target.id;
+ if(f==="pf"){
+  const v=i=>$("#"+i).value.trim(),price=+v("p"),sale=v("sp")?+v("sp"):0,stock=Number(v("st")),m=$("#pm");
+  if(v("n").length<2)return m.textContent="Please enter a product name.";
+  if(!(price>0))return m.textContent="Please enter a price above zero.";
+  if(sale&&!(sale>0&&sale<price))return m.textContent="The sale price must be lower than the normal price.";
+  if(!Number.isInteger(stock)||stock<0)return m.textContent="Stock must be a whole number, 0 or more.";
+  const o={...edit,n:v("n"),c:v("c"),g:v("g"),p:price,sp:sale,s:v("s"),k:v("k"),st:stock,im:v("im")};
+  if(o.id)D.prods=D.prods.map(p=>p.id===o.id?o:p);else{o.id=Date.now();D.prods.push(o)}
+  save();edit=null;msg="Product saved.";draw();
+ }else if(f==="cf"){
+  const n=$("#cn").value.trim();if(n.length<2)return $("#cm").textContent="Please enter a category name.";
+  if(D.cats.some(c=>c.toLowerCase()===n.toLowerCase()))return $("#cm").textContent="That category already exists.";
+  D.cats.push(n);save();draw();
+ }else if(f==="df"){
+  const c=$("#dcc").value.trim().toUpperCase(),v=+$("#dv").value,t=$("#dt").value,m=$("#dm2");
+  if(!/^[A-Z0-9_-]{3,30}$/.test(c))return m.textContent="Use 3 to 30 letters, numbers, - or _.";
+  if(!(v>0)||(t==="percent"&&v>100))return m.textContent="Enter a valid discount value.";
+  if(D.codes.some(x=>x.c===c))return m.textContent="That code already exists.";
+  D.codes.push({c,t,v,min:+$("#dm").value||0,on:true,used:0});save();draw();
+ }
+});
+draw();
+</script>
+</body>
+</html>
