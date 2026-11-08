@@ -258,4 +258,17 @@ function renderCart(){
 ${m.disc?`<div class="tot ok"><span>Discount</span><span>−${naira(m.disc)}</span></div>`:""}
 <div class="tot"><span>Delivery</span><span>${naira(m.del)}</span></div>
 <div class="tot" style="font-weight:600;font-size:18px"><span>Total</span><span>${naira(m.total)}</span></div>
-<button class="btn gold" id="co" style="width:100%;margin-top:10p
+<button class="btn gold" id="co" style="width:100%;margin-top:10px">Proceed to checkout</button>
+<p class="msg" id="com" role="status"></p>
+<p class="note">Preview only. Code BAMI10 gives 10% off here. Delivery fees are placeholders.</p>`:"";
+}
+ 
+function openCart(){renderCart();$("#drawer").classList.add("on");$("#scrim").classList.add("on");$("#drawer").setAttribute("aria-hidden","false")}
+function closeAll(){$("#drawer").classList.remove("on");$("#modal").classList.remove("on");$("#scrim").classList.remove("on");$("#drawer").setAttribute("aria-hidden","true")}
+ 
+function openModal(id){
+  const p=P.find(x=>x.id===id);open=p;sel={size:"",colour:"",qty:1};
+  const draw=()=>{$("#modal").innerHTML=`<div style="display:flex;justify-content:space-between;gap:10px"><h2 style="font-size:32px">${p.n}</h2><button class="ib" id="mx" aria-label="Close">✕</button></div>
+<p class="price" style="font-size:20px">${naira(p.p)}</p><p class="tag">Sample product. Stock not real.</p>
+<b>Size</b><div class="opt">${p.s.map(s=>`<button class="chip" data-s="${s}" aria-pressed="${sel.size===s}">${s}</button>`).join("")}</div>
+<b>Colour</b><div class="opt">${p.k.map(k=>`<button class="chip" data-k="${k}" aria-pressed="${sel.colour===k}">${k}</button>`).join("")}</div>
