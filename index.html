@@ -320,3 +320,10 @@ $("#bAcc").onclick=()=>{alert("Accounts use Firebase in the real site. Not conne
 $("#scrim").onclick=closeAll;
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAll()});
 $("#nl").addEventListener("submit",e=>{e.preventDefault();const v=$("#em").value.trim(),m=$("#nlm");
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){m.className="msg err";m.textContent="Please enter a valid email address."}
+  else{m.className="msg";m.textContent="Preview only. Your email wasn’t saved."}});
+render();
+</script>
+</body>
+</html>
+ 
