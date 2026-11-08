@@ -290,3 +290,19 @@ function addFromModal(){
 document.addEventListener("click",e=>{
   const t=e.target.closest("button,a");if(!t)return;
   const d=t.dataset;
+if(d.w){const id=+d.w;wish=wish.includes(id)?wish.filter(x=>x!==id):[...wish,id];save();render()}
+  else if(d.q)openModal(+d.q);
+  else if(d.c!==undefined&&t.classList.contains("chip")){cat=d.c;render()}
+  else if(d.c!==undefined&&t.classList.contains("cat")){cat=P.some(p=>p.c===d.c)?d.c:"All";render();$("#shop").scrollIntoView()}
+  else if(d.s){sel.size=d.s;open.draw()}
+  else if(d.k){sel.colour=d.k;open.draw()}
+  else if(t.id==="qm"){sel.qty=Math.max(1,sel.qty-1);open.draw()}
+  else if(t.id==="qp"){sel.qty=Math.min(10,sel.qty+1);open.draw()}
+  else if(d.g){f.g=d.g.toLowerCase();$("#fg").value=f.g;onlyWish=false;render()}
+  else if(t.id==="clr"){f={g:"",s:"",k:"",p:0};cat="All";q="";onlyWish=false;["#fg","#fs","#fk","#fp"].forEach(s=>$(s).value=s==="#fp"?"0":"");$("#q").value="";render()}
+  else if(t.id==="mx"||t.id==="dc"||t.id==="cs")closeAll();
+  else if(t.id==="mc"){if(addFromModal()){closeAll();openCart()}}
+  else if(t.id==="mb"){if(addFromModal()){closeAll();openCart();$("#com").textContent=""}}
+  else if(d.a){cart[+d.a].qty++;save();render();renderCart()}
+  else if(d.m){const i=cart[+d.m];i.qty=Math.max(1,i.qty-1);save();render();renderCart()}
+  else if(d.r){cart.splice(+d.r,1);save();render();renderCart()}
