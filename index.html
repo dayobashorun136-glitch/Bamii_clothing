@@ -272,3 +272,21 @@ function openModal(id){
 <p class="price" style="font-size:20px">${naira(p.p)}</p><p class="tag">Sample product. Stock not real.</p>
 <b>Size</b><div class="opt">${p.s.map(s=>`<button class="chip" data-s="${s}" aria-pressed="${sel.size===s}">${s}</button>`).join("")}</div>
 <b>Colour</b><div class="opt">${p.k.map(k=>`<button class="chip" data-k="${k}" aria-pressed="${sel.colour===k}">${k}</button>`).join("")}</div>
+<b>Quantity</b><div class="opt"><div class="qty"><button id="qm" aria-label="Decrease">−</button><span>${sel.qty}</span><button id="qp" aria-label="Increase">+</button></div></div>
+<p class="msg err" id="mm" role="alert"></p>
+<div class="row"><button class="btn" id="mc" style="flex:1">Add to cart</button><button class="btn gold" id="mb" style="flex:1">Buy now</button></div>`};
+  open.draw=draw;draw();$("#modal").classList.add("on");$("#scrim").classList.add("on");
+}
+ 
+function addFromModal(){
+  const p=open;
+  if(!sel.size)return $("#mm").textContent="Please select a size.",false;
+  if(!sel.colour)return $("#mm").textContent="Please select a colour.",false;
+  const f=cart.find(i=>i.id===p.id&&i.size===sel.size&&i.colour===sel.colour);
+  if(f)f.qty+=sel.qty;else cart.push({id:p.id,n:p.n,p:p.p,size:sel.size,colour:sel.colour,qty:sel.qty});
+  save();render();return true;
+}
+ 
+document.addEventListener("click",e=>{
+  const t=e.target.closest("button,a");if(!t)return;
+  const d=t.dataset;
