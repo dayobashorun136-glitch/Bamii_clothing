@@ -306,3 +306,17 @@ if(d.w){const id=+d.w;wish=wish.includes(id)?wish.filter(x=>x!==id):[...wish,id]
   else if(d.a){cart[+d.a].qty++;save();render();renderCart()}
   else if(d.m){const i=cart[+d.m];i.qty=Math.max(1,i.qty-1);save();render();renderCart()}
   else if(d.r){cart.splice(+d.r,1);save();render();renderCart()}
+else if(t.id==="ap"){const v=$("#cd").value.trim().toUpperCase();code=v==="BAMI10"?v:"";renderCart();$("#cm").textContent=v&&!code?"That code is not valid.":code?"Code applied.":"";$("#cm").className="msg "+(code?"ok":"err")}
+  else if(t.id==="co")$("#com").textContent="Payment isn’t connected in this preview. In the real site this opens Paystack, and an order is marked paid only after the server verifies the payment.";
+});
+document.addEventListener("change",e=>{const i=e.target.id,v=e.target.value;
+  if(i==="st"){state=v;renderCart()}else if(i==="sort"){sort=v;render()}
+  else if(i==="fg"){f.g=v;render()}else if(i==="fs"){f.s=v;render()}else if(i==="fk"){f.k=v;render()}else if(i==="fp"){f.p=+v;render()}});
+$("#q").addEventListener("input",e=>{q=e.target.value;render()});
+$("#bSearch").onclick=()=>{$("#shop").scrollIntoView();$("#q").focus()};
+$("#bCart").onclick=openCart;
+$("#bWish").onclick=()=>{onlyWish=!onlyWish;render();$("#shop").scrollIntoView()};
+$("#bAcc").onclick=()=>{alert("Accounts use Firebase in the real site. Not connected in this preview.")};
+$("#scrim").onclick=closeAll;
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAll()});
+$("#nl").addEventListener("submit",e=>{e.preventDefault();const v=$("#em").value.trim(),m=$("#nlm");
